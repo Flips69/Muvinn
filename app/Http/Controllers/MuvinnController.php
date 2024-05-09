@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\MuvinnFormRequest;
-use App\Http\Requests\MuvinnUpdateFormRequest;
+use App\Http\Requests\MuvinnFormRequestUpdate;
 use App\Models\Muvinn;
 use Illuminate\Http\Request;
 
@@ -14,7 +14,7 @@ class MuvinnController extends Controller
         $muvinn = Muvinn::create([
             'estado' => $request->estado,
             'cidade' => $request->cidade,
-            'endereco' => $request->esndereco,
+            'endereco' => $request->endereco,
             'tipos_imoveis' => $request->tipos_imoveis,
             'preco' => $request->preco,
             'banheiros' => $request->banheiros,
@@ -22,17 +22,13 @@ class MuvinnController extends Controller
             'vagas'=> $request->vagas,
             'area_do_imovel'=> $request-> area_do_imovel,
         ]);
-        return response()->json([
-            "success" => true,
-            "message" => "Imóvel cadastrado com êxito!",
-            "data" => $muvinn
-        ], 200);
-        if (count($muvinn) > 0) {
-            return response()->json([
-                "status" => false,
-                "message" => "Impossivel realizar o cadastro do imóvel!"
-            ]);
-        }
+
+        return response()->json([    
+            'status' => true,
+            'message' => "Imóvel cadastrado com êxito!",
+            'data' => $muvinn
+        ]);
+    
     }
     public function pesquisaPorTipoDeImovel(Request $request)
     {
@@ -56,24 +52,24 @@ class MuvinnController extends Controller
         if (!isset($muvinn)) {
             return response()->json([
                 'status' => false,
-                'message' => "Nenhum imovel encontrado"
+                'message' => "Nenhum imóvel encontrado."
             ]);
         }
 
         $muvinn->delete();
         return response()->json([
             'status' => true,
-            'message' => "Imovel deletado com sucesso"
+            'message' => "Imóvel deletado com sucesso."
         ]);
     }
-    public function update(MuvinnUpdateFormRequest $request)
+    public function update(MuvinnFormRequestUpdate $request)
     {
         $muvinn = Muvinn::find($request->id);
 
-        if (!isset($servico)) {
+        if (!isset($muvinn)) {
             return response()->json([
                 'status' => false,
-                'message' => "Serviço não encontrado"
+                'message' => "Imóvel não encontrado."
             ]);
         }
         
@@ -109,7 +105,7 @@ class MuvinnController extends Controller
 
         return response()->json([
             'status' => true,
-            'message' => "Anuncio de imovel atualizado."
+            'message' => "Anúncio de imóvel atualizado."
         ]);
         
     }
@@ -119,7 +115,7 @@ class MuvinnController extends Controller
         if(count($muvinn)==0){
             return response()->json([
                 'status'=> false,
-                'message'=> "Nenhim imovel encontrado."
+                'message'=> "Nenhum imóvel encontrado."
             ]);
         }
         return response()->json([

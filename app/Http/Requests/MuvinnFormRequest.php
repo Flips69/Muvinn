@@ -28,7 +28,7 @@ class MuvinnFormRequest extends FormRequest
             'cidade' => 'required|max:100|min:5',
             'endereco' => 'required|max:100|min:5',
             'tipos_imoveis' => 'required|max:100|min:5',
-            'preco' => 'required|decimal 10,2',
+            'preco' => 'required|decimal: 2',
             'banheiros' => 'required|integer',
             'quartos'=> 'required|integer',
             'vagas'=> 'integer',
@@ -37,7 +37,7 @@ class MuvinnFormRequest extends FormRequest
     }
     public function failedValidation(Validator $validator){
         throw new HttpResponseException(response()->json([
-            'success' => false,
+            'status' => false,
             'error' => $validator->errors()
         ]));
 }

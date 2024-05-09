@@ -6,7 +6,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class MuvinnFormRequest extends FormRequest
+class MuvinnFormRequestUpdate extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,15 +24,15 @@ class MuvinnFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'estado' => 'required|max:2|min:2',
-            'cidade' => 'required|max:100|min:5',
-            'endereco' => 'required|max:100|min:5',
-            'tipos_imoveis' => 'required|max:100|min:5',
-            'preco' => 'required|decimal 10,2',
-            'banheiros' => 'required|integer',
-            'quartos'=> 'required|integer',
+            'estado' => 'max:2|min:2',
+            'cidade' => 'max:100|min:5',
+            'endereco' => 'max:100|min:5',
+            'tipos_imoveis' => 'max:100|min:5',
+            'preco' => 'decimal: 2',
+            'banheiros' => 'integer',
+            'quartos'=> 'integer',
             'vagas'=> 'integer',
-            'area_do_imovel'=> 'required|max:100|min:5'
+            'area_do_imovel'=> 'max:100|min:1'
         ];
     }
     public function failedValidation(Validator $validator){
@@ -41,10 +41,9 @@ class MuvinnFormRequest extends FormRequest
             'error' => $validator->errors()
         ]));
 }
-
 public function messages()
 {
-    return [
+    return[
         'estado.max' => 'O campo estado deve conter no máximo 2 caracteres.',
         'estado.min' => 'O campo estado deve conter no míninmo 2 caracteres.',
         'cidade.max' => 'O campo cidade deve conter no máximo 100 caracteres',
