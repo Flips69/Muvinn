@@ -32,7 +32,7 @@ class MuvinnFormRequest extends FormRequest
             'banheiros' => 'required|integer',
             'quartos'=> 'required|integer',
             'vagas'=> 'integer',
-            'area_do_imovel'=> 'required|max:100|min:5'
+            'area_do_imovel'=> 'required|max:100'
         ];
     }
     public function failedValidation(Validator $validator){
@@ -63,7 +63,6 @@ public function messages()
         'quartos.required' => 'O campo quartos é obrigatório.',
         'area_do_imovel.required' => 'O campo de área de imóvel é obrigatório.',
         'area_do_imovel.max' => 'O campo área de imóvel deve conter no máximo 100 caracteres.',
-        'area_do_imovel.min' => 'O campo área de imóvel deve conter no mínimo 5 caracteres.'
     ];
 }
 }
