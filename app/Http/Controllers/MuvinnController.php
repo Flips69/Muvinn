@@ -30,9 +30,9 @@ class MuvinnController extends Controller
         ]);
     
     }
-    public function pesquisaPorTipoDeImovel(Request $request)
+    public function pesquisaPorEndereco(Request $request)
     {
-        $muvinn = Muvinn::where('tipos_imoveis', 'like', '%' . $request->tipos_imoveis . '%')->get();
+        $muvinn = Muvinn::where('endereco', 'like', '%' . $request->endereco . '%')->get();
 
         if (count($muvinn) > 0) {
 
